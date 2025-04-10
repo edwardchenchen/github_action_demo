@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - uses: engineerd/setup-kind@v0.6.0
+      - uses: engineerd/setup-kind@v0.6.2
         with:
           version: "v0.24.0"
       - name: Testing
