@@ -1,0 +1,37 @@
+name: chrome
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.11", "3.12"]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      
+      - name: Setup Chrome
+        # You may pin to the exact commit or the version.
+        # uses: browser-actions/setup-chrome@c785b87e244131f27c9f19c1a33e2ead956ab7ce
+        uses: browser-actions/setup-chrome@v1.7.3
+        with:
+          # The Google Chrome/Chromium version to install and use.
+          chrome-version: latest
+          # Install dependent packages for Google Chrome/Chromium (Linux only).
+          install-dependencies: true
+          # Install the compatible version of ChromeDriver with the installed Google Chrome/Chromium.
+          install-chromedriver: true
+        id: setup-chrome
+      - run: |
+          ${{ steps.setup-chrome.outputs.chrome-path }} --version
+          
