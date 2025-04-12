@@ -1,5 +1,7 @@
 name: "Create cluster using KinD"
-on: [pull_request, push]
+on:
+  push:
+  workflow_dispatch:
 
 jobs:
   kind:
